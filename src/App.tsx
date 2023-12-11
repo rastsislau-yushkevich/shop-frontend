@@ -1,13 +1,12 @@
+import AppRoutes from 'app.routes';
 import PageHeader from 'components/page-header.comp';
-import ProductsPage from 'products';
-import React from 'react';
-import { BrowserRouter, Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
     <BrowserRouter>
       <PageHeader />
-      <ProductsPage />
+      <AppRoutes />
     </BrowserRouter>
   );
 }
