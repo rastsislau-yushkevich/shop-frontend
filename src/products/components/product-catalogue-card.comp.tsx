@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material"
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material"
 import { FC } from "react"
 import { ProductCardProps } from "../types/product-card.types"
 

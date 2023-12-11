@@ -1,0 +1,10 @@
+export interface SignUpFormData {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+export interface SignInFormData {
+  email: string;
+  password: string;
+}
