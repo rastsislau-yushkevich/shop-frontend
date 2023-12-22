@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { Route, Routes } from "react-router-dom"
-import { Suspended } from "libs/suspended"
+import { PublicRoute } from "libs/suspended"
 
 const SignInPage = React.lazy(() => import('auth/signin.page'))
 const SignUpPage = React.lazy(() => import('auth/signup.page'))
@@ -8,8 +8,8 @@ const SignUpPage = React.lazy(() => import('auth/signup.page'))
 const AuthRoutes: FC = () => {
   return(
     <Routes>
-      <Route path='/sign-in' element={<Suspended WrappedComponent={SignInPage} />}/>
-      <Route path='/sign-up' element={<Suspended WrappedComponent={SignUpPage} />}/>
+      <Route path='/sign-in' element={<PublicRoute element={SignInPage} />}/>
+      <Route path='/sign-up' element={<PublicRoute element={SignUpPage} />}/>
     </Routes>
   )
 }
