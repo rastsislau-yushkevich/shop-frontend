@@ -1,21 +1,19 @@
-import { MenuItem, Typography } from "@mui/material"
-import { NavLink } from "react-router-dom"
+import { Button, MenuItem, Typography } from "@mui/material"
 import { PageLinkProps } from "./types/page-link.types"
 import { FC } from "react"
+import { NavLink } from "react-router-dom"
 
 const PageLink: FC<PageLinkProps> = ({link, handler}) => {
   return (
-    <NavLink
-      to={`/${link.toLowerCase()}`}
-      style={{
-        textDecoration: 'none',
-        color: 'inherit',
-      }}
-    >
+    <Button
+    color='secondary'
+    sx={{
+      display: 'block'
+    }}>
       <MenuItem onClick={handler ? handler : () => {}}>
-        <Typography textAlign="center">{link}</Typography>
+        <NavLink style={{color: 'inherit', textDecoration: 'none', textTransform: 'capitalize'}} to={link}><Typography textAlign="center">{link}</Typography></NavLink>
       </MenuItem>
-    </NavLink>
+    </Button>
   )
 }
 

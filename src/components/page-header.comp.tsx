@@ -1,14 +1,21 @@
 import React, { FC } from 'react';
-import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
+import { AppBar, Avatar, Box, Container, IconButton, Menu, Toolbar, Tooltip } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import PageLink from './page-link.comp';
 import LogoText from './logo-text.comp';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrentUser } from 'auth/store/auth.selectors';
+import { useSignOutMutation } from 'auth/store/authApi.slice';
+import { removeCredentials } from 'auth/store/auth.slice';
+import { toggleOpen } from 'cart/store/cart.slice';
 
 const PageHeader: FC = () => {
-
+  const dispatch = useDispatch();
+  const user: any = useSelector(selectCurrentUser);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [signOut] = useSignOutMutation();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -24,6 +31,18 @@ const PageHeader: FC = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleToggleCartOpen = () => {
+    setAnchorElUser(null);
+    dispatch(toggleOpen());
+  }
+
+  const handleSignOut = () => {
+    setAnchorElUser(null);
+    signOut();
+    dispatch(removeCredentials());
+    localStorage.clear()
+  }
 
   return (
     <AppBar color='secondary' position="static">
@@ -79,14 +98,14 @@ const PageHeader: FC = () => {
             <LogoText mobile={true} />
           </NavLink>
           <Box sx={{ flexGrow: 1, gap: '20px', display: { xs: 'none', md: 'flex' } }}>
-            <PageLink link='Products' />
+            <PageLink link='products'/>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
+              {user ? <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt={user?.email} />
+              </IconButton> : <Link to='/auth/sign-in'>Sign In</Link>}
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
@@ -104,8 +123,9 @@ const PageHeader: FC = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <PageLink link='Cart' handler={handleCloseUserMenu} />
-              <PageLink link='History' handler={handleCloseUserMenu} />
+              <PageLink link='cart' handler={handleToggleCartOpen} />
+              <PageLink link='history' handler={handleCloseUserMenu} />
+              <PageLink link='sign out' handler={handleSignOut} />
             </Menu>
           </Box>
         </Toolbar>
