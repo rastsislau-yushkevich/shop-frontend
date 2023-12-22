@@ -1,21 +1,21 @@
-import { Avatar, Box, Button, Chip, Divider, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material"
-import { FC, useEffect, useState } from "react"
-import { ProductDto } from "products/types/product.dto";
-import { useAddToOrderMutation, useGetCartQuery, useRemoveFromCartMutation } from "cart/store/ordersApi.slice";
+import { Avatar, Box, Button, Chip, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material"
+import { FC, useCallback, useEffect, useState } from "react"
+import { useAddToOrderMutation, useRemoveFromCartMutation } from "cart/store/ordersApi.slice";
+import { CartProductProps } from "cart/types/cart.types";
 
-const CartProduct: FC<{ orderId: string, product: ProductDto, quantity: number }> = ({ orderId, product, quantity }) => {
+const CartProduct: FC<CartProductProps> = ({ orderId, product, quantity }: CartProductProps) => {
   const { id, name, image, price, quantityAvailable } = product;
   const [newQuantity, setNewQuantity] = useState(quantity);
   const [addToOrder] = useAddToOrderMutation();
   const [removeFromOrder] = useRemoveFromCartMutation();
 
-  const add = async () => {
-    await addToOrder({productId: id, quantity: newQuantity});
-  }
+  const add = useCallback(() => {
+    addToOrder({productId: id, quantity: newQuantity});
+  }, [addToOrder, id, newQuantity])
 
   useEffect(() => {
     add()
-  }, [newQuantity])
+  }, [add])
 
   return (
     <ListItem

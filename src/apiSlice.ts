@@ -17,12 +17,9 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
   let result = await baseQuery(args, api, extraOptions);
   if (result?.error?.status === 401) {
-    console.log('sending refresh token');
     const rT = localStorage.getItem('refresh_token');
     const refreshToken = JSON.parse(String(rT));
-    console.log(refreshToken)
     const refreshResult: any = await baseQuery({ url: '/auth/refresh', method: 'POST', body: {'refreshToken': `Bearer ${refreshToken}`}}, api, extraOptions);
-    console.log(refreshResult);
     if (refreshResult?.data) {
       api.dispatch(setTokens({ ...refreshResult.data }));
       localStorage.setItem('access_token', JSON.stringify(refreshResult.data.access_token))

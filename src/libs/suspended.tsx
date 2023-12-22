@@ -1,6 +1,4 @@
-import { selectCurrentUser } from "auth/store/auth.selectors";
-import React, { FC, Suspense } from "react";
-import { useSelector } from "react-redux";
+import { FC, Suspense } from "react";
 import { Navigate } from "react-router-dom";
 
 export const PrivateRoute: FC<{element: any}> = ({ element: Element }) => {
@@ -16,7 +14,7 @@ export const PrivateRoute: FC<{element: any}> = ({ element: Element }) => {
 
 export const PublicRoute: FC<{ element: any }> = ({ element: Element }) => {
   return (
-    <Suspense fallback={<div>Loading</div>}>
+    <Suspense fallback={<div>Loading...</div>}>
       <Element />
     </Suspense>
   )
@@ -24,7 +22,7 @@ export const PublicRoute: FC<{ element: any }> = ({ element: Element }) => {
 
 export const Suspended: FC<any> = ({ WrappedComponent }) => {
   return (
-    <Suspense fallback={<div>Loading</div>}>
+    <Suspense fallback={<div>Loading...</div>}>
       <WrappedComponent />
     </Suspense>
   )

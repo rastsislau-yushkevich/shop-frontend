@@ -7,10 +7,10 @@ import { ProductDto } from "./types/product.dto";
 const ProductsList: FC = () => {
   const { data, isLoading } = useGetProductsQuery();
 
-  if(isLoading) {
+  if (isLoading) {
     return <div>Loading...</div>
   }
-  const products: ProductDto[] = data;
+  const products: ProductDto[] | undefined = data;
 
   return (
     <Grid

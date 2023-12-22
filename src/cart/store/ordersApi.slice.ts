@@ -36,7 +36,8 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: '/orders/clear-order',
         method: 'POST',
-      })
+      }),
+      invalidatesTags: ['OrderItems']
     }),
   })
 })

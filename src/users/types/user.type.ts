@@ -5,8 +5,8 @@ export interface User {
 	created_at: number;
 	updated_at: number;
 	email: string;
-	firstName: string | null;
-	lastName: string | null;
-	refreshToken: string;
-	orders: Order[];
+	firstName?: string | null;
+	lastName?: string | null;
+	refreshToken?: string | null;
+	orders?: Order[];
 }

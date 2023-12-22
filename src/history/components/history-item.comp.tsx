@@ -1,8 +1,9 @@
 import { List, ListItem, Typography } from "@mui/material";
 import { HistoryItemProps } from "history/types/history-item.type"
 import HistoryOrderItem from "./history-order-item.comp";
+import { FC } from "react";
 
-const HistoryItem = ({ order }: HistoryItemProps) => {
+const HistoryItem: FC<HistoryItemProps> = ({ order }) => {
   const { total, status, orderItems } = order;
 
   return (

@@ -1,6 +1,7 @@
+import { FC } from "react"
 import AuthRoutes from "./auth.routes"
 
-const AuthPage = () => {
+const AuthPage: FC = () => {
   return (
     <AuthRoutes />
   )
