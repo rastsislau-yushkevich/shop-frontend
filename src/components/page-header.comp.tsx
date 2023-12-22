@@ -9,10 +9,11 @@ import { selectCurrentUser } from 'auth/store/auth.selectors';
 import { useSignOutMutation } from 'auth/store/authApi.slice';
 import { removeCredentials } from 'auth/store/auth.slice';
 import { toggleOpen } from 'cart/store/cart.slice';
+import { User } from 'users/types/user.type';
 
 const PageHeader: FC = () => {
   const dispatch = useDispatch();
-  const user: any = useSelector(selectCurrentUser);
+  const user: User | null = useSelector(selectCurrentUser);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const [signOut] = useSignOutMutation();

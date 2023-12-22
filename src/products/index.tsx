@@ -1,11 +1,9 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import ProductsList from "./products-list.page";
 
 const ProductsPage: FC = () => {
-  return(
-    <>
-      <ProductsList />
-    </>
+  return (
+    <ProductsList />
   )
 }
 

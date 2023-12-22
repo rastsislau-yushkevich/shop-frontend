@@ -20,7 +20,7 @@ function App() {
       const refresh_token = JSON.parse(refreshToken)
       dispatch(setTokens({access_token, refresh_token}))
     }
-  }, [])
+  }, [dispatch])
   return (
     <BrowserRouter>
       <PageHeader />

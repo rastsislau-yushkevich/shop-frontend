@@ -1,7 +1,8 @@
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { HistoryOrderItemProps } from "history/types/history-order-item.type";
+import { FC } from "react";
 
-const HistoryOrderItem = ({ orderItem }: HistoryOrderItemProps) => {
+const HistoryOrderItem: FC<HistoryOrderItemProps> = ({ orderItem }) => {
   const { product, quantity } = orderItem;
   return (
     <Card sx={{ maxWidth: 150 }}>

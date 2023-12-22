@@ -2,8 +2,10 @@ import { useDeleteOrderMutation, useGetCartQuery, useSubmitOrderMutation } from 
 import CartProduct from "./cart-product.comp";
 import { Box, Button, List, ListItem, ListItemText, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { FC } from "react";
+import { OrderItem } from "cart/types/order-item.type";
 
-const CartProductsList = () => {
+const CartProductsList: FC = () => {
   const { data, isLoading } = useGetCartQuery();
   const [deleteOrder] = useDeleteOrderMutation();
   const [submitOrder] = useSubmitOrderMutation();
@@ -32,7 +34,7 @@ const CartProductsList = () => {
           alignItems: 'center',
           gap: '20px'
         }}>
-          {data?.orderItems?.map((item: any) =>
+          {data?.orderItems?.map((item: OrderItem) =>
             <CartProduct
               key={item.id}
               orderId={item.id}

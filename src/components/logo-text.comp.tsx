@@ -3,7 +3,7 @@ import { FC } from "react"
 import { NavLink } from "react-router-dom"
 import { LogoTextProps } from "./types/logo-text.types"
 
-const LogoText: FC<LogoTextProps> = ({mobile}: LogoTextProps) => {
+const LogoText: FC<LogoTextProps> = ({ mobile }: LogoTextProps) => {
   return (
     mobile ?
       <Typography

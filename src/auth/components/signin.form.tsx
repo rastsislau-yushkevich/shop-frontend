@@ -7,9 +7,9 @@ import { setTokens, setUser } from "auth/store/auth.slice";
 import { useLazyGetMeQuery } from "users/store/usersApi.slice";
 import { useNavigate } from "react-router-dom";
 import { AuthDto } from "auth/types/auth.dto";
-import { store } from "store";
+import { FC } from "react";
 
-const SignInForm = () => {
+const SignInForm: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -18,8 +18,8 @@ const SignInForm = () => {
     formState: { errors }
   } = useForm<SignInFormData>();
   
-  const [signIn, {data: accessToken, isLoading: authIsLoading}] = useSignInMutation();
-  const [getCurrentUser, {data, isLoading: userIsLoading}] = useLazyGetMeQuery();
+  const [signIn, {isLoading: authIsLoading}] = useSignInMutation();
+  const [getCurrentUser, {isLoading: userIsLoading}] = useLazyGetMeQuery();
   
   const handleSignIn = async (formData: SignInFormData) => {
     try {
@@ -27,8 +27,6 @@ const SignInForm = () => {
       dispatch(setTokens(tokens));
       localStorage.setItem('access_token', JSON.stringify(tokens.access_token));
       localStorage.setItem('refresh_token', JSON.stringify(tokens.refresh_token));
-      // document.cookie = `access_token=${tokens.access_token}`
-      // document.cookie = `refresh_token=${tokens.refresh_token}`
       const user = await getCurrentUser().unwrap();
       localStorage.setItem('currentUser', JSON.stringify(user));
       dispatch(setUser(localStorage.getItem('currentUser')))

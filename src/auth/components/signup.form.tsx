@@ -7,8 +7,9 @@ import { useSignUpMutation } from "auth/store/authApi.slice";
 import { AuthDto } from "auth/types/auth.dto";
 import { setTokens, setUser } from "auth/store/auth.slice";
 import { useLazyGetMeQuery } from "users/store/usersApi.slice";
+import { FC } from "react";
 
-const SignUpForm = () => {
+const SignUpForm: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
@@ -27,8 +28,6 @@ const SignUpForm = () => {
       dispatch(setTokens(tokens));
       localStorage.setItem('access_token', JSON.stringify(tokens.access_token));
       localStorage.setItem('refresh_token', JSON.stringify(tokens.refresh_token));
-      // document.cookie = `access_token=${tokens.access_token}`
-      // document.cookie = `refresh_token=${tokens.refresh_token}`
       const user = await getCurrentUser().unwrap();
       localStorage.setItem('currentUser', JSON.stringify(user));
       dispatch(setUser(localStorage.getItem('currentUser')))
